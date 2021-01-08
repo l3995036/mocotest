@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.mocotest.mocotest.mapper.ResponseMapper">
+
+    <resultMap id="BaseResultMap" type="com.yc.mocotest.mocotest.model.Response">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="response" jdbcType="VARCHAR" property="response"/>
+    </resultMap>
+
+    <select id="getResponseByCode" resultType="com.yc.mocotest.mocotest.model.Response">
+        select * from moco  where code = #{code}
+    </select>
+
+</mapper>
