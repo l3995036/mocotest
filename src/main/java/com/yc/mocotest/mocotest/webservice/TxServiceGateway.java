@@ -15,6 +15,6 @@ public interface TxServiceGateway {
 
     @WebMethod
     //@WebResult(targetNamespace = "http://webservice.fdlk.nstc.com")
-    String send(@WebParam(name = "data",targetNamespace = "http://webservice.fdlk.nstc.com") String data);
+    String send(@WebParam(name = "data",targetNamespace = "http://webservice.fdlk.nstc.com") RequestData data);
 
 }

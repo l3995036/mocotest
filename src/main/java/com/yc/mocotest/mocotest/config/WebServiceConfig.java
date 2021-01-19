@@ -1,5 +1,6 @@
-package com.yc.mocotest.mocotest.webservice;
+package com.yc.mocotest.mocotest.config;
 
+import com.yc.mocotest.mocotest.webservice.TxServiceGateway;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;
 

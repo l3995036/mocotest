@@ -18,7 +18,7 @@ public class TxServiceGatewayImpl implements TxServiceGateway {
     private static final String RESPONSE_MESSAGE = "1";
 
     @Override
-    public String send(String data) {
+    public String send(RequestData data) {
         System.out.println(data);
         return "";
 /*
