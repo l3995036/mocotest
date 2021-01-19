@@ -15,8 +15,7 @@ public class ResponseController {
     ResponseService responseService;
     @RequestMapping("/response")
     public String getResponse(String code) {
-        String response = responseService.getResponseByCode(code).getResponse();
-        return response;
+        Response response = responseService.getResponseByCode(code);
+        return null != response ? response.getResponse() : null;
     }
-
 }

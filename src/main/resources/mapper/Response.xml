@@ -12,4 +12,7 @@
         select * from moco  where code = #{code}
     </select>
 
+    <select id="save" resultType="com.yc.mocotest.mocotest.model.Response">
+        insert into moco(code, response) values (#{code}, #{response});
+    </select>
 </mapper>

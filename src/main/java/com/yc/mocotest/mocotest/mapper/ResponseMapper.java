@@ -8,4 +8,6 @@ public interface ResponseMapper {
 
     Response getResponseByCode(String code);
 
+    void save(String code, String response);
+
 }

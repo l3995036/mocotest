@@ -1,11 +1,14 @@
 package com.yc.mocotest.mocotest.webservice;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yc.mocotest.mocotest.model.RequestData;
 import org.springframework.stereotype.Component;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 @Component
 @WebService(name = "TxServiceGateway", serviceName = "TxServiceGateway", targetNamespace = "http://webservice.fdlk.nstc.com",
@@ -15,8 +18,8 @@ public class TxServiceGatewayImpl implements TxServiceGateway {
     private static final String RESPONSE_MESSAGE = "1";
 
     @Override
-    public String send(String message) {
-        System.out.println(message);
+    public String send(String data) {
+        System.out.println(data);
         return "";
 /*
         String response_message = null;
