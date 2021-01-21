@@ -28,5 +28,5 @@ logging:
     root: info
     com.yc.mocotest.mocotest: debug
   file:
-    path: /var/logs/
+    path: /app/logs/
   config: classpath:logback-spring.xml
