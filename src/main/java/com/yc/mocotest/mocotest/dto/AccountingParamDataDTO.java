@@ -1,4 +1,4 @@
-package com.yc.mocotest.mocotest.dto.request;
+package com.yc.mocotest.mocotest.dto;
 
 import lombok.Data;
 
@@ -13,6 +13,6 @@ import java.math.BigDecimal;
 public class AccountingParamDataDTO implements Serializable {
 
     @XmlElement(name = "AMOUNT", namespace = "http://webservice.fdlk.nstc.com")
-    private BigDecimal AMOUNT;
+    private String AMOUNT;
 
 }

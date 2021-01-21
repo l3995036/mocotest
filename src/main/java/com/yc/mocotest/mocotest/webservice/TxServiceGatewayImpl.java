@@ -1,47 +1,59 @@
 package com.yc.mocotest.mocotest.webservice;
 
-import com.yc.mocotest.mocotest.dto.ResultDTO;
-import com.yc.mocotest.mocotest.dto.request.AccountingParamDataDTO;
+import com.alibaba.fastjson.JSON;
+import com.yc.mocotest.mocotest.dto.AccountingParamDataDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.jws.WebService;
-import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 @WebService(name = "TxServiceGateway", serviceName = "TxServiceGateway", targetNamespace = "http://webservice.fdlk.nstc.com",
         endpointInterface = "com.yc.mocotest.mocotest.webservice.TxServiceGateway")
 public class TxServiceGatewayImpl implements TxServiceGateway {
 
-    private static final String RESPONSE_MESSAGE = "1";
+    @Autowired
+    RedisTemplate<String, String> redisTemplate;
+
+    private final static String ONE = "1";
+    private final static String TWO = "2";
+    private final static String THREE = "3";
 
     @Override
-    public ResultDTO accounting(AccountingParamDataDTO data) {
-        ResultDTO result = new ResultDTO();
-        BigDecimal amount = data.getAMOUNT();
-        if (amount.compareTo(BigDecimal.ZERO) > 0) {
-            result = new ResultDTO("000000", "", "");
-
-        }
-        return result;
-/*
-        String response_message = null;
-        JSONObject param = JSONObject.parseObject(message);
-        String amount = param.getString("AMOUNT");
-
-        if (null == amount) {
-            return "";
+    public String send(String code, AccountingParamDataDTO data) {
+        Map<String,Object> result = new HashMap();
+        String amount = data.getAMOUNT();
+        if (null == code || null == amount) {
+            String jsonString = redisTemplate.opsForValue().get("MPBS-T008_999999");
+            //result = JSON.parseObject(jsonString, Map.class);
+            return jsonString;
         }
         String substring = amount.substring(amount.length() - 1);
-        if(substring == "1"){
-            return "";
+        if (substring.equals(ONE)) {
+            String jsonString = redisTemplate.opsForValue().get("MPBS-T008_000000_1");
+            //result = JSON.parseObject(jsonString, Map.class);
+            return jsonString;
+        }else if (substring.equals(TWO)) {
+            String jsonString = redisTemplate.opsForValue().get("MPBS-T008_000000_0");
+            //result = JSON.parseObject(jsonString, Map.class);
+            return jsonString;
+        } else if (substring.equals(THREE)) {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            String jsonString = redisTemplate.opsForValue().get("MPBS-T008_000000_1");
+            result = JSON.parseObject(jsonString, Map.class);
+            return jsonString;
+        } else {
+            String jsonString = redisTemplate.opsForValue().get("MPBS-T008_999999");
+            //result = JSON.parseObject(jsonString, Map.class);
+            return jsonString;
         }
-        if(substring == "2"){
-
-            return "";
-        }
-        return response_message;
     }
-*/
 
-    }
 }
